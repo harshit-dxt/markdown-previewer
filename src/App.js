@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import React, { Component } from 'react'
+import MarkdownInput from './Components/MarkdownInput/MarkdownInput';
+import MarkdownPreview from './Components/MarkdownPreview/MarkdownPreview';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputContent: ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({
+      inputContent: e.target.value
+    })
+  }
+
+  render() {
+    return (
+      <div className='app-container'>
+        <header className='app-header'>Markdown Previewer</header>
+        <div className='component-container'>
+          <div className='child-container'><MarkdownInput  handleChange={this.handleChange}/></div>
+          <div className='child-container markdown-preview'><MarkdownPreview  input={this.state.inputContent}/></div>
+        </div>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
